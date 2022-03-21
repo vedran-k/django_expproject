@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Naslov{% endblock %}
+
+{% block content %}
+    {% if date_list %}
+        <p class="link"> Total: {{all}} </p>
+        <table class = 'styled-table'>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th colspan="5">Costs</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for n, list, s in date_list %}
+                    <tr>
+                        <td>{{ n }}</td>
+                        {% for e in list %}
+                            <td>{{ e.cost }}</td>
+                        {% endfor %}
+                        <td>Total: {{ s }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="link"><a href="{% url 'home' %}">Home</a></p>
+        <p class="link"><a href="{% url 'logout' %}">Log Out</a></p>
+    {% else %}
+        <p>No costs are available.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Naslov{% endblock %}
+
+{% block content %}
+    {% if cat_list %}
+        <p class="link"> Total for {{ level }}: {{all}} </p>
+        <table class = 'styled-table'>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Subcategory</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exp in cat_list %}
+                    <tr>
+                        <td>{{ exp.createdOn.date}}</td>
+                        <td>{{ exp.createdOn.time}}</td>
+                        <td><a href="{% url 'costless:subcategory' exp.subcat.subCatName %}">{{exp.subcat.subCatName }}</a></td>
+                        <td>{{ exp.cost}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="link"><a href="{% url 'home' %}">Home</a></p>
+        <p class="link"><a href="{% url 'logout' %}">Log Out</a></p>
+    {% else %}
+        <p>No costs are available.</p>
+    {% endif %}
+{% endblock %}

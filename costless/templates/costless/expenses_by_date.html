@@ -3,28 +3,33 @@
 {% block title %}Naslov{% endblock %}
 
 {% block content %}
+    <br>
     {% if date_list %}
         <p class="link"> Total: {{all}} </p>
         <table class = 'styled-table'>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th colspan="5">Costs</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for n, list, s in date_list %}
+            {% for n, list, s in date_list %}
+                <thead>
                     <tr>
-                        <td>{{ n }}</td>
-                        {% for e in list %}
-                            <td>{{ e.cost }}</td>
-                        {% endfor %}
-                        <td>Total: {{ s }}</td>
+                        <th>All costs in {{ n }}:</th>
                     </tr>
-                {% endfor %}
-            </tbody>
+                </thead>
+                <tbody>
+                        {% for e in list %}
+                            <tr>
+                                <td>{{ e.createdOn.date}}</td>
+                                <td>{{ e.createdOn|time}}</td>
+                                <td>{{ e.cost }}</td>
+                            </tr>
+                        {% endfor %}
+                    <tr>
+                        <td colspan = "2">Total:</td>
+                        <td>{{ s }}</td>
+                    </tr>
+                </tbody>
+            {% endfor %}
         </table>
         <p class="link"><a href="{% url 'home' %}">Home</a></p>
+        <p class="link"><a href="{% url 'costless:new-expense' %}">Enter new expense</a></p>
         <p class="link"><a href="{% url 'logout' %}">Log Out</a></p>
     {% else %}
         <p>No costs are available.</p>

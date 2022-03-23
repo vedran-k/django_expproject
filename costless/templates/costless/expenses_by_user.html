@@ -3,6 +3,7 @@
 {% block title %}Naslov{% endblock %}
 
 {% block content %}
+    <br>
     {% if latest_expenses_list %}
         <p class="link">Total: {{s}}</p>
         <table class = 'styled-table'>
@@ -19,7 +20,7 @@
                 {% for exp in latest_expenses_list %}
                     <tr>
                         <td>{{ exp.createdOn.date}}</td>
-                        <td>{{ exp.createdOn.time}}</td>
+                        <td>{{ exp.createdOn|time}}</td>
                         <td><a href="{% url 'costless:category' exp.cat.catName %}">{{ exp.cat.catName}}</a> </td>
                         <td>{{ exp.subcat.subCatName}}</td>
                         <td>{{ exp.cost}}</td>
@@ -28,6 +29,7 @@
             </tbody>
         </table>
         <p class="link"><a href="{% url 'home' %}">Home</a></p>
+        <p class="link"><a href="{% url 'costless:new-expense' %}">Enter new expense</a></p>
         <p class="link"><a href="{% url 'logout' %}">Log Out</a></p>
     {% else %}
         <p>No costs are available.</p>

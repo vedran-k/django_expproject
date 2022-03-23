@@ -4,6 +4,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+    <br>
     <p class="link"> Hi {{ user.username }}! </p>
 
     <p class="link"><a href="{% url 'costless:new-expense' %}">Enter new expense</a></p>
@@ -13,6 +14,7 @@
     <p class="link"><a href="{% url 'logout' %}">Log Out</a></p>
     <p class="link"><a href="{% url 'password_reset' %}">Reset Password</a></p>
 {% else %}
+    <br>
     <p class="link">You are not logged in</p>
     <p class="link"><a href="{% url 'login' %}">Log In</a></p>
     <p class="link">or</p>

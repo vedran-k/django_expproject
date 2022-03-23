@@ -18,7 +18,7 @@
                 {% for exp in cat_list %}
                     <tr>
                         <td>{{ exp.createdOn.date}}</td>
-                        <td>{{ exp.createdOn.time}}</td>
+                        <td>{{ exp.createdOn|time}}</td>
                         <td><a href="{% url 'costless:subcategory' exp.subcat.subCatName %}">{{exp.subcat.subCatName }}</a></td>
                         <td>{{ exp.cost}}</td>
                     </tr>

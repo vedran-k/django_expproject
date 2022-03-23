@@ -17,7 +17,7 @@
                 {% for exp in cat_list %}
                     <tr>
                         <td>{{ exp.createdOn.date}}</td>
-                        <td>{{ exp.createdOn.time}}</td>
+                        <td>{{ exp.createdOn|time}}</td>
                         <td>{{ exp.cost}}</td>
                     </tr>
                 {% endfor %}

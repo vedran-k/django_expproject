@@ -17,7 +17,7 @@ class ExpensesByUserListView(LoginRequiredMixin, generic.ListView):
         s = 0
         for q in latest_expenses_list:
             s += q.cost
-        context = {'latest_expenses_list':latest_expenses_list, 's':s}
+        context = {'latest_expenses_list': latest_expenses_list, 's': s}
         return context
 
 class ExpensesByCategoryListView(LoginRequiredMixin, generic.ListView):
@@ -36,7 +36,7 @@ class ExpensesByCategoryListView(LoginRequiredMixin, generic.ListView):
             cat_exp = latest_expenses_list.filter(cat__catName = c)
             for q in cat_exp:
                 s += q.cost
-            cat_list.append((c, cat_exp,s))
+            cat_list.append((c, cat_exp, s))
             all += s
         context = {'cat_list': cat_list, 'all': all }
         return context
@@ -51,13 +51,14 @@ class ExpensesByDateListView(LoginRequiredMixin, generic.ListView):
         latest_expenses_list = Expense.objects.filter(user=self.request.user)
         dates = set(q.createdOn.month for q in latest_expenses_list)
         date_list = []
+        months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         all = 0
         for d in dates:
             s = 0
-            date_exp = latest_expenses_list.filter(createdOn__month = d)
+            date_exp = latest_expenses_list.filter(createdOn__month=d)
             for q in date_exp:
                 s += q.cost
-            date_list.append((d, date_exp,s))
+            date_list.append((months[d-1], date_exp, s))
             all += s
         context = {'date_list': date_list, 'all': all }
         return context
